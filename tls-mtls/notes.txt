@@ -1,0 +1,46 @@
+TLS / mTLS — Transport Layer Security
+=======================================
+Bucket: Application Security & Data Protection
+Topic: TLS vs mTLS — protocol differences and deployment contexts
+
+WHAT GOES HERE
+  Configuration artifacts and policy for enforcing encrypted transport.
+  Demonstrate you understand the handshake, certificate chain, and mutual auth.
+
+KEY CONCEPTS TO DEMONSTRATE
+  TLS handshake (simplified)
+    1. Client hello — supported cipher suites, TLS version
+    2. Server hello — chosen cipher, server certificate
+    3. Client validates server cert against trusted CA
+    4. Key exchange — session keys derived (ECDHE)
+    5. Encrypted channel established
+
+  mTLS difference
+    Client ALSO presents a certificate
+    Server validates client cert — both sides authenticated
+    Used for: service-to-service, zero trust internal APIs, IoT devices
+
+  When to use which
+    TLS only   — public-facing web apps, user browsers can't carry client certs easily
+    mTLS       — internal microservices, API gateways to backends, Cilium service mesh
+
+  Common attacks
+    Downgrade attack       — force negotiation to weak cipher/version
+    Certificate pinning bypass — strip pinning via MitM proxy
+    Expired cert not rotated   — outage or silent fallback to HTTP
+
+  In your lab
+    Cilium already enforces mTLS between pods (Transparent Encryption)
+    Wazuh manager ↔ agent uses TLS on port 1514
+    Wazuh indexer uses TLS on 9200
+
+ARTIFACTS TO BUILD
+  nginx-tls.conf            — TLS 1.3 only, strong ciphers, HSTS header
+  mtls-policy.yaml          — Cilium network policy enforcing mTLS between services
+  cert-rotation-playbook.yml — Ansible: automate cert renewal before expiry
+
+MITRE: T1557 (Adversary-in-the-Middle), T1040 (Network Sniffing)
+NIST:  SC-8 (Transmission Confidentiality), SC-17 (Public Key Infrastructure Certs)
+CIS:   3.10 (Encrypt Sensitive Data in Transit), 12.8 (Manage Network Infrastructure)
+
+dtls, tls, quic relatiin to kubernetes
