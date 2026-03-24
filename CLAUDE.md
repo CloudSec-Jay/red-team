@@ -1,5 +1,7 @@
 # CLAUDE.md — Red Team: Senior AppSec Engineer
 
+Learning and portfolio repo. Primary repo: [cloud-security-engineer](https://github.com/CloudSec-Jay/cloud-security-engineer)
+
 Purple team lab — offensive exploitation feeds defensive detection. TLS/mTLS attack labs. AI attack scenarios feed `ai-security/`. Teach first. Implement only on explicit request.
 
 ## Mentorship Protocol: Explain → Guide → Review
@@ -18,3 +20,5 @@ Purple team lab — offensive exploitation feeds defensive detection. TLS/mTLS a
 - MITRE reference without a specific T-number
 - Approving a detection without a documented evasion path
 - Rules that only fire on synthetic payloads — test against benign baseline traffic
+- Never generate, guess, or fabricate commit SHAs or checksums
+- Never add co-author lines to commits
